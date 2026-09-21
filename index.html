@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>System Check</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #050505;
+        color: #00ff66;
+        font-family: "Courier New", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .screen {
+        width: 90%;
+        max-width: 700px;
+        padding: 30px;
+    }
+
+    .terminal {
+        border: 1px solid #00ff66;
+        padding: 25px;
+        box-shadow: 0 0 25px rgba(0,255,102,.25);
+        background: #020202;
+    }
+
+    .line {
+        margin: 12px 0;
+        opacity: 0;
+        animation: appear .5s forwards;
+    }
+
+    .bar {
+        width: 100%;
+        height: 12px;
+        border: 1px solid #00ff66;
+        margin-top: 25px;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%;
+        background: #00ff66;
+        box-shadow: 0 0 10px #00ff66;
+        transition: width .2s;
+    }
+
+    .final {
+        display: none;
+        text-align: center;
+        animation: fadeIn 1.5s ease;
+    }
+
+    .love {
+        color: #ff4d88;
+        font-family: Arial, sans-serif;
+        font-size: clamp(45px, 12vw, 100px);
+        font-weight: bold;
+        text-shadow: 0 0 20px #ff4d88;
+    }
+
+    .heart {
+        animation: beat 1s infinite;
+        display: inline-block;
+    }
+
+    @keyframes appear {
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes beat {
+        50% {
+            transform: scale(1.3);
+        }
+    }
+
+    .small {
+        color: #777;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="terminal" id="terminal">
+
+        <div class="line">> Initializing connection...</div>
+        <div class="line">> Tey Joya trying to view your account...</div>
+        <div class="line">> Checking account security...</div>
+        <div class="line">> Bypassing security... ██████████</div>
+        <div class="line">> Accessing account...</div>
+        <div class="line">> Account access: SUCCESS</div>
+        <div class="line">> Downloading secret information...</div>
+
+        <div class="bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="line" id="finished">
+            > Process finished.
+        </div>
+
+        <div class="line" id="hacked">
+            > I HACKED YOUR ACCOUNT! 😈
+        </div>
+
+    </div>
+
+    <div class="final" id="final">
+        <div class="love">
+            I LOVE YOU <span class="heart">❤️</span>
+        </div>
+
+        <p style="color:#aaa;">
+            You just got pranked 😂
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+let progress = 0;
+
+const progressBar = document.getElementById("progress");
+const finished = document.getElementById("finished");
+const hacked = document.getElementById("hacked");
+const terminal = document.getElementById("terminal");
+const final = document.getElementById("final");
+
+// Progress animation
+const loading = setInterval(() => {
+
+    progress += 2;
+
+    progressBar.style.width = progress + "%";
+
+    if (progress >= 100) {
+
+        clearInterval(loading);
+
+        setTimeout(() => {
+            finished.style.opacity = "1";
+        }, 500);
+
+        setTimeout(() => {
+            hacked.style.opacity = "1";
+        }, 1500);
+
+        setTimeout(() => {
+
+            terminal.style.display = "none";
+            final.style.display = "block";
+
+        }, 3500);
+    }
+
+}, 80);
+
+</script>
+
+</body>
+</html>
